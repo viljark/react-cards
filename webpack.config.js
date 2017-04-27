@@ -4,7 +4,9 @@ var path = require("path"),
 	ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const vendor = [
-	"lodash"
+	"lodash",
+	"react",
+	"react-dom"
 ];
 
 function createConfig(isDebug) {
@@ -32,6 +34,14 @@ function createConfig(isDebug) {
 	const clientEntry = ["./src/client/client.js"];
 	let publicPath = "/build/";
 	if (isDebug) {
+		plugins.push(new webpack.HotModuleReplacementPlugin());
+		plugins.push(new webpack.NamedModulesPlugin());
+		clientEntry.unshift(
+			"react-hot-loader/patch",
+			"webpack-dev-server/client?http://localhost:8080/",
+			"webpack/hot/only-dev-server"
+		);
+		publicPath = "http://localhost:8080/build/";
 
 	} else {
 		plugins.push(
@@ -52,7 +62,8 @@ function createConfig(isDebug) {
 		},
 		output: {
 			path: path.join(__dirname, "public", "build"),
-			filename: "[name].js"
+			filename: "[name].js",
+			publicPath
 		},
 		resolve: {
 			extensions: ["*", ".js", ".jsx"],
