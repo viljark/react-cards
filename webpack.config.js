@@ -1,4 +1,4 @@
-var path = require("path"),
+let path = require("path"),
 	_ = require("lodash"),
 	webpack = require("webpack"),
 	ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -10,7 +10,7 @@ const vendor = [
 ];
 
 function createConfig(isDebug) {
-	const devtool = isDebug ? "cheap-module-source-map" : false;
+	const devtool = isDebug ? "eval-source-map" : false;
 	const plugins = [
 		new webpack.optimize.CommonsChunkPlugin({name: "vendor", filename: "vendor.js"}),
 		new webpack.DefinePlugin({

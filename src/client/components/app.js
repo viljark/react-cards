@@ -7,7 +7,15 @@ class AppContainer extends Component {
 		console.log("app.js mounted 1");
 	}
 	render() {
-		return <h1>yo world?!!!</h1>;
+		return (
+			<section>
+				<h1>Yo world</h1>
+				<button onClick={this._click.bind(this)}>click me</button>
+			</section>
+		);
+	}
+	_click() {
+		console.log("im clicked");
 	}
 }
 
