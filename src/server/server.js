@@ -1,9 +1,28 @@
-const test = "fafa";
+import express from "express";
+import http from "http";
 
-console.log(`hello ${test}`);
+import {isDevelopment} from "./settings";
 
-const obj = {hey: 1};
+const app = express();
+const server = new http.Server(app);
 
-const obj2 = {...obj, blegh: 2};
+app.set("view engine", "pug");
+app.use(express.static("public"));
 
-console.log(obj2);
+const useExternalStyles = !isDevelopment;
+const scriptRoot = isDevelopment
+	? "http://localhost:8080/build"
+	: "/build";
+
+app.get("*", (req, res) => {
+	res.render("index", {
+		useExternalStyles,
+		scriptRoot
+	});
+});
+
+const port = process.env.PORT || 3000;
+
+server.listen(port, () => {
+	console.log(`Started http server on ${port}`);
+});
