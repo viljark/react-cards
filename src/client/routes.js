@@ -1,6 +1,24 @@
 import React from "react";
-import AppContainer from "./components/app";
+import {Switch, Route, Redirect} from "react-router-dom";
 
-export default function() {
-	return <AppContainer/>;
+import AppContainer from "./components/app";
+import Lobby from "./components/lobby";
+import Game from "./components/game";
+
+
+export default function () {
+	return (
+		<div>
+			<Switch>
+				<Route exact path="/" render={(match) => (
+					<AppContainer {...Lobby} {...match}/>
+				)}/>
+				<Route exact path="/game/:gameId" render={(match) => (
+					<AppContainer {...Game}  {...match}/>
+				)}/>
+				<Redirect from="*" to="/"/>
+			</Switch>
+		</div>
+
+	);
 }

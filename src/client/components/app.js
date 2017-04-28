@@ -7,11 +7,19 @@ class AppContainer extends Component {
 		console.log("app.js mounted 1");
 	}
 	render() {
+		const {Main, Sidebar, match} = this.props;
+		console.log(this.props);
 		return (
-			<section>
-				<h1>Yo world</h1>
-				<button onClick={this._click.bind(this)}>click me</button>
-			</section>
+			<div className={`c-application`}>
+				<div className="inner">
+					<div className="sidebar">
+						<Sidebar {...match} />
+					</div>
+					<div className="main">
+						<Main {...match} />
+					</div>
+				</div>
+			</div>
 		);
 	}
 	_click() {
