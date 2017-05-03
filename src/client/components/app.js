@@ -1,16 +1,29 @@
 import "./app.scss";
 
-import React, {Component} from "react";
+import React from "react";
+import dialogTypes from "./dialogs";
+import {ContainerBase} from "../lib/component";
 
-class AppContainer extends Component {
-	componentDidMount() {
-		console.log("app.js mounted 1");
+class AppContainer extends ContainerBase {
+	componentWillMount() {
+		const {stores: {app}} = this.context;
+
+		this.subscribe(app.dialogs$, dialogs => this.setState({dialogs}));
 	}
 	render() {
 		const {Main, Sidebar, match} = this.props;
-		console.log(this.props);
+
+		const {dialogs} = this.state;
+		const dialogStack = dialogs.map(dialog => {
+			const DialogComponent = dialogTypes[dialog.id];
+			return <DialogComponent {...dialog.props} key={dialog.id}/>;
+		});
+
 		return (
-			<div className={`c-application`}>
+			<div className={`c-application ${dialogStack.length ? "dialogs-open" : "dialogs-closed"}`}>
+				<div className="dialogs">
+					{dialogStack}
+				</div>
 				<div className="inner">
 					<div className="sidebar">
 						<Sidebar {...match} />

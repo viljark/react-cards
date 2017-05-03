@@ -47,7 +47,7 @@ describe("dispatcher", () => {
 		dispatcher.emit(testAction2());
 
 		expect(action1Count).toBe(1);
-		expect(action1Count).toBe(2);
+		expect(action2Count).toBe(1);
 	});
 
 	it("allows us to subscribe with rxjs", () => {

@@ -35,7 +35,7 @@ export default class Chat extends Component {
 		if (messages.length === 0) {
 			return;
 		}
-		const newIndex = messages[messages-length - 1].index;
+		const newIndex = messages[messages.length - 1].index;
 
 		if (this._lastIndex === newIndex) {
 			return;
