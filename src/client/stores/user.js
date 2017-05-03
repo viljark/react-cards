@@ -19,6 +19,7 @@ export default class UserStore {
 		dispatcher.onRequest({
 			[A.USER_LOGIN]: (action) => {
 				const validator = validateName(action.name);
+
 				if (validator.didFail) {
 					dispatcher.fail(action, validator.message);
 					return;
