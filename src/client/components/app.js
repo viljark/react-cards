@@ -4,6 +4,7 @@ import React from "react";
 import * as A from "../actions";
 import dialogTypes from "./dialogs";
 import {ContainerBase} from "../lib/component";
+import { withRouter } from 'react-router';
 
 class AppContainer extends ContainerBase {
 	componentWillMount() {
@@ -32,7 +33,7 @@ class AppContainer extends ContainerBase {
 	}
 
 	render() {
-		const {Main, Sidebar, match} = this.props;
+		const {Main, Sidebar} = this.props;
 
 		const {dialogs} = this.state;
 		const dialogStack = dialogs.map(dialog => {
@@ -47,19 +48,15 @@ class AppContainer extends ContainerBase {
 				</div>
 				<div className="inner">
 					<div className="sidebar">
-						<Sidebar {...match} />
+						<Sidebar />
 					</div>
 					<div className="main">
-						<Main {...match} />
+						<Main />
 					</div>
 				</div>
 			</div>
 		);
 	}
-
-	_click() {
-		console.log("im clicked");
-	}
 }
 
-export default AppContainer;
+export default withRouter(AppContainer);

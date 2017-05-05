@@ -10,11 +10,11 @@ export default function () {
 	return (
 		<div>
 			<Switch>
-				<Route exact path="/" render={(match) => (
-					<AppContainer {...Lobby} {...match}/>
+				<Route exact path="/" render={() => (
+					<AppContainer {...Lobby}/>
 				)}/>
-				<Route exact path="/game/:gameId" render={(match) => (
-					<AppContainer {...Game}  {...match}/>
+				<Route exact path="/game/:gameId" render={ () => (
+					<AppContainer {...Game}/>
 				)}/>
 				<Redirect from="*" to="/"/>
 			</Switch>
